@@ -1,31 +1,31 @@
 package ejercicio4;
 
-import java.util.*;
+import java.util.Date;
 
 public class CuantosPrimos2 {
-    public static void main(String[] x) throws InterruptedException {
-        long t0 = (new Date()).getTime(); //t0=instante de inicio de los cálculos
-        Runnable p1 = new PrimosThread(1,200000);
-        Runnable p2 = new PrimosThread(2000000,4000000);
-        Runnable p3 = new PrimosThread(4000000,6000000);
-        Runnable p4 = new PrimosThread(6000000,8000000);
-        Runnable p5 = new PrimosThread(8000000,10000000);
+    public static void main(String[] x) {
+        long ti = (new Date()).getTime(); //t0=instante de inicio de los cálculos
+        PrimosThread p = new PrimosThread(1,10000);
+        Thread t1 = new Thread(p);
+        Multiplos7 q = new Multiplos7(1,10000);
+        Thread t2 = new Thread(q);
+        Suma3y5 s = new Suma3y5(1,10000);
+        Thread t3 = new Thread(s);
 
-        new Thread(p1).start();
-        new Thread(p2).start();
-        new Thread(p3).start();
-        new Thread(p4).start();
-        new Thread(p5).start();
-
-
-
-
+        t1.start();
+        t2.start();
+        t3.start();
 
         try {
-            p1.join(); //esperamos a que terminen todos
+            t1.join(); t2.join(); t3.join(); //esperamos a que terminen todos
 
         } catch (InterruptedException e) {}
-        long t1 = (new Date()).getTime(); //t1 = instante de final de los cálculos
-        System.out.printf("Número de primos menores que 10.000.000: " + n + " calculado en " + (t1-t0) + " miliseg.");
+        int n1 = p.cuantos();
+        long n2 = q.suma();
+        long n3 = s.suma();
+        long tf = (new Date()).getTime(); //t1 = instante de final de los cálculos
+        System.out.println("Número de primos menores que 10.000: " + n1 + " calculado en " + (tf-ti) + " miliseg.");
+        System.out.println("Suma de múltiplos de 7 menores que 10.000: " + n2 + " calculado en " + (tf-ti) + " miliseg.");
+        System.out.println("Suma de números terminados en 3 y 5 menores que 10.000: " + n3 + " calculado en " + (tf-ti) + " miliseg.");
     }
 }

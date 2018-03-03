@@ -1,14 +1,8 @@
 package ejercicio4;
 
-import java.util.*;
-import java.util.concurrent.*;
-
-
-
 public class PrimosThread implements Runnable {
 
     private int x,y,n=0;
-
 
     public PrimosThread(int x, int y) {
         this.x = x;
@@ -36,18 +30,6 @@ public class PrimosThread implements Runnable {
                 n++;
             }
         }
-        try {
-            Thread.sleep(numeroRandom(1000, 5000));
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
-
-
-    private static int numeroRandom(int min, int max) {
-        Random rand = new Random();
-        int randomNum = rand.nextInt((max - min) + 1) + min;
-        return randomNum;
     }
 
     public int cuantos() {
