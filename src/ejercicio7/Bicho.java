@@ -21,14 +21,6 @@ public class Bicho extends Thread {
         return this.nombre;
     }
 
-    public void setGeneracion(int generacion) {
-        this.generacion = generacion;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
     public void TiempoVida () {
         Random rand = new Random();
         int await = rand.nextInt(1000 - 500 + 1) + 500;
